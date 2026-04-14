@@ -67,7 +67,6 @@ em {
 
 /* ── HEADER ── */
 #header-page {
-  position: sticky;
   top: 0;
   z-index: 200;
   width: 100%;
