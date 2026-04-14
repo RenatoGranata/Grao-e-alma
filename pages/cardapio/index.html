@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cardápio | Grão & Alma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../global.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <canvas id="bgCanvas"></canvas>
+  <div id="toast"></div>
+  <div id="cart-overlay"></div>
+
+  <div id="mobile-nav">
+    <a href="../../index.html">Início</a>
+    <a href="../sobre/index.html">Sobre</a>
+    <a href="index.html" class="active">Cardápio</a>
+    <a href="../novidades/index.html">Novidades</a>
+    <a href="../contato/index.html">Contato</a>
+  </div>
+
+  <header id="header-page">
+    <a href="../../index.html" id="logo">
+      <span class="coffee-emoji">☕</span>
+      <span>Grão</span><span class="amp">&</span><span>Alma</span>
+    </a>
+    <nav>
+      <ul class="flex">
+        <li><a href="../../index.html">Início</a></li>
+        <li><a href="../sobre/index.html">Sobre</a></li>
+        <li><a href="index.html" class="active">Cardápio</a></li>
+        <li><a href="../novidades/index.html">Novidades</a></li>
+        <li><a href="../contato/index.html">Contato</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <div class="cart-container">
+        <button class="cart-btn" id="cart-btn">
+          <span>🛒</span><span>Carrinho</span><span id="cart-count">0</span>
+        </button>
+        <div id="cart-dropdown">
+          <div class="cart-header">
+            <strong>Seu Pedido</strong>
+            <span class="cart-limit-badge" id="cart-limit-badge">0 / 10</span>
+          </div>
+          <div id="cart-items-list" class="cart-items-inner"></div>
+          <div class="cart-footer">
+            <div class="cart-total-row">
+              <span class="cart-total-label">Total</span>
+              <span class="cart-total-value" id="cart-total-display">R$ 0,00</span>
+            </div>
+            <div class="cart-limit-bar">
+              <div class="cart-limit-fill" id="cart-fill-bar" style="width:0%"></div>
+            </div>
+            <p class="cart-limit-text" id="cart-limit-text">Máximo de 10 itens por pedido</p>
+            <button class="btn-finalizar" id="btn-finalizar" disabled>Finalizar Pedido →</button>
+          </div>
+        </div>
+      </div>
+      <button id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main class="section-margin">
+    <section>
+      <div class="title-home-container">
+        <span class="separator"></span>
+        <p>CARDÁPIO</p>
+      </div>
+      <div class="title-menu-container">
+        <h1><em>O que servimos</em></h1>
+        <p>Tudo feito na hora, com ingredientes selecionados e muito amor.</p>
+      </div>
+    </section>
+
+    <div class="products-section">
+      <input type="text" id="search-input" placeholder="🔎 Buscar no cardápio...">
+
+      <div class="products-filter">
+        <input type="radio" name="filter-items" id="all-items" checked>
+        <label for="all-items">Tudo</label>
+        <input type="radio" name="filter-items" id="coffee-items">
+        <label for="coffee-items">☕ Cafés Quentes</label>
+        <input type="radio" name="filter-items" id="cold-items">
+        <label for="cold-items">🧊 Bebidas Frias</label>
+        <input type="radio" name="filter-items" id="dessert-items">
+        <label for="dessert-items">🍨 Sobremesas</label>
+        <input type="radio" name="filter-items" id="food-items">
+        <label for="food-items">🥐 Comidas</label>
+        <input type="radio" name="filter-items" id="graos-items">
+        <label for="graos-items">🫘 Grãos</label>
+        <input type="radio" name="filter-items" id="specials-items">
+        <label for="specials-items">✨ Especiais</label>
+        <input type="radio" name="filter-items" id="delivery-items">
+        <label for="delivery-items">🛵 Para Delivery</label>
+      </div>
+
+      <p id="search-msg" class="search-msg"></p>
+      <div class="products-cards-container" id="cards-container"></div>
+    </div>
+
+  </main>
+
+  <div class="banner">
+    <span>☕</span>
+    <div>
+      <h2>Quer trazer o café pra casa?</h2>
+      <p>Vendemos nossos grãos frescos torrados para viagem. Pergunte na hora!</p>
+      <div class="banner-btn">
+        <a href="../contato/index.html" class="btn-primary btn-anim">Fale Conosco</a>
+      </div>
+    </div>
+  </div>
+
+  <footer id="footer-container" class="section-margin">
+    <div class="footer-info">
+      <div class="footer-logo">
+        <strong><span>☕</span> Grão <span class="amp">&</span> Alma</strong>
+        <p>Cafeteria artesanal com alma</p>
+      </div>
+      <nav class="footer-nav">
+        <strong>Navegação</strong>
+        <ul>
+          <li class="footer-menu-option"><a href="../../index.html">Início</a></li>
+          <li class="footer-menu-option"><a href="../sobre/index.html">Sobre</a></li>
+          <li class="footer-menu-option"><a href="index.html">Cardápio</a></li>
+          <li class="footer-menu-option"><a href="../novidades/index.html">Novidades</a></li>
+          <li class="footer-menu-option"><a href="../contato/index.html">Contato</a></li>
+        </ul>
+      </nav>
+      <div class="place-footer-container">
+        <div class="hours"><strong>Horários</strong><p>Seg–Sex: 7h às 21h</p><p>Sáb–Dom: 8h às 20h</p></div>
+        <div class="address"><strong>Endereço</strong><p>Rua dos Cafezais, 42</p><p>Rio de Janeiro, RJ</p></div>
+      </div>
+    </div>
+    <p class="copy">© 2026 Grão & Alma. Todos os direitos reservados.</p>
+  </footer>
+
+  <a href="#header-page" class="back-to-top">↑</a>
+  <script src="../../cart.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>

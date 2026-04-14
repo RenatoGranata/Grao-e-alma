@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contato | Grão & Alma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <link rel="stylesheet" href="../../global.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <canvas id="bgCanvas"></canvas>
+  <div id="toast"></div>
+  <div id="cart-overlay"></div>
+
+  <div id="mobile-nav">
+    <a href="../../index.html">Início</a>
+    <a href="../sobre/index.html">Sobre</a>
+    <a href="../cardapio/index.html">Cardápio</a>
+    <a href="../novidades/index.html">Novidades</a>
+    <a href="index.html" class="active">Contato</a>
+  </div>
+
+  <header id="header-page">
+    <a href="../../index.html" id="logo"><span class="coffee-emoji">☕</span><span>Grão</span><span class="amp">&</span><span>Alma</span></a>
+    <nav><ul class="flex">
+      <li><a href="../../index.html">Início</a></li>
+      <li><a href="../sobre/index.html">Sobre</a></li>
+      <li><a href="../cardapio/index.html">Cardápio</a></li>
+      <li><a href="../novidades/index.html">Novidades</a></li>
+      <li><a href="index.html" class="active">Contato</a></li>
+    </ul></nav>
+    <div class="header-actions">
+      <div class="cart-container">
+        <button class="cart-btn" id="cart-btn"><span>🛒</span><span>Carrinho</span><span id="cart-count">0</span></button>
+        <div id="cart-dropdown">
+          <div class="cart-header"><strong>Seu Pedido</strong><span class="cart-limit-badge" id="cart-limit-badge">0 / 10</span></div>
+          <div id="cart-items-list" class="cart-items-inner"></div>
+          <div class="cart-footer">
+            <div class="cart-total-row"><span class="cart-total-label">Total</span><span class="cart-total-value" id="cart-total-display">R$ 0,00</span></div>
+            <div class="cart-limit-bar"><div class="cart-limit-fill" id="cart-fill-bar" style="width:0%"></div></div>
+            <p class="cart-limit-text" id="cart-limit-text">Máximo de 10 itens por pedido</p>
+            <button class="btn-finalizar" id="btn-finalizar" disabled>Finalizar Pedido →</button>
+          </div>
+        </div>
+      </div>
+      <button id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero section-margin">
+      <div class="title-home-container"><span class="separator"></span><p>Fale Conosco</p></div>
+      <h1>Venha tomar <br><em>um café</em></h1>
+      <p class="page-hero-sub">Estamos esperando por você com a chaleira quente.</p>
+    </section>
+
+    <section id="contato" class="section-margin">
+      <div class="contato-grid">
+
+        <!-- FORMULÁRIO -->
+        <div class="form-wrapper">
+          <h2>Envie uma mensagem</h2>
+          <p class="form-intro">Reservas, eventos, parcerias ou só um oi — responderemos em até 24h.</p>
+
+          <div class="contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="field-nome">Nome *</label>
+                <input type="text" id="field-nome" placeholder="Seu nome completo">
+              </div>
+              <div class="form-group">
+                <label for="field-email">E-mail *</label>
+                <input type="email" id="field-email" placeholder="seu@email.com">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="field-tel">Telefone / WhatsApp</label>
+                <input type="tel" id="field-tel" placeholder="(21) 99999-9999">
+              </div>
+              <div class="form-group">
+                <label for="field-assunto">Assunto</label>
+                <select id="field-assunto">
+                  <option value="">Selecione...</option>
+                  <option>Reserva de mesa</option>
+                  <option>Evento privado</option>
+                  <option>Workshop de barismo</option>
+                  <option>Parceria comercial</option>
+                  <option>Compra de grãos</option>
+                  <option>Outro</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="field-mensagem">Mensagem *</label>
+              <textarea id="field-mensagem" rows="5" placeholder="Conta pra gente..."></textarea>
+            </div>
+            <div class="form-group form-check">
+              <input type="checkbox" id="field-concordo">
+              <label for="field-concordo">Concordo com a <a href="#">Política de Privacidade</a> e recebimento de comunicações.</label>
+            </div>
+            <button type="button" id="btn-enviar" onclick="enviarFormulario()">Enviar Mensagem ☕</button>
+            <p id="form-msg" class="form-msg"></p>
+          </div>
+        </div>
+
+        <!-- INFO -->
+        <div class="contato-info">
+          <h2>Onde estamos</h2>
+          <div class="info-cards">
+            <div class="info-card"><span>📍</span><div><strong>Endereço</strong><p>Rua dos Cafezais, 42<br>Santa Teresa · Rio de Janeiro, RJ</p></div></div>
+            <div class="info-card"><span>📞</span><div><strong>Telefone & WhatsApp</strong><p>(21) 98765-4321</p></div></div>
+            <div class="info-card"><span>✉️</span><div><strong>E-mail</strong><p>oi@graoealma.com.br</p></div></div>
+            <div class="info-card"><span>🕐</span><div><strong>Horários</strong><p>Seg–Sex: 7h às 21h<br>Sáb–Dom: 8h às 20h</p></div></div>
+          </div>
+          <div class="social-section">
+            <strong>Nos siga nas redes</strong>
+            <div class="social-links">
+              <a href="#" class="social-btn"><span>📸</span> Instagram</a>
+              <a href="#" class="social-btn"><span>💬</span> WhatsApp</a>
+              <a href="#" class="social-btn"><span>👍</span> Facebook</a>
+              <a href="#" class="social-btn"><span>🎬</span> TikTok</a>
+            </div>
+          </div>
+          <div class="map-placeholder">
+            <div class="map-pin">📍</div>
+            <strong>Rua dos Cafezais, 42 — Santa Teresa, Rio de Janeiro</strong>
+            <p>A 5 minutos do bondinho de Santa Teresa · Estacionamento nas proximidades</p>
+            <a rel="noopener" href="https://maps.google.com" target="_blank" class="btn-primary btn-anim btn-mapa">Ver no Google Maps</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="banner">
+      <span>☕</span>
+      <div>
+        <h2>Venha tomar um café com a gente</h2>
+        <p>Segunda a Sexta, 7h às 21h · Sábado e Domingo, 8h às 20h</p>
+        <div class="banner-btn">
+          <a href="../cardapio/index.html" class="btn-primary btn-anim">Ver Cardápio</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer id="footer-container" class="section-margin">
+    <div class="footer-info">
+      <div class="footer-logo"><strong><span>☕</span> Grão <span class="amp">&</span> Alma</strong><p>Cafeteria artesanal com alma</p></div>
+      <nav class="footer-nav"><strong>Navegação</strong><ul>
+        <li class="footer-menu-option"><a href="../../index.html">Início</a></li>
+        <li class="footer-menu-option"><a href="../sobre/index.html">Sobre</a></li>
+        <li class="footer-menu-option"><a href="../cardapio/index.html">Cardápio</a></li>
+        <li class="footer-menu-option"><a href="../novidades/index.html">Novidades</a></li>
+        <li class="footer-menu-option"><a href="index.html">Contato</a></li>
+      </ul></nav>
+      <div class="place-footer-container">
+        <div class="hours"><strong>Horários</strong><p>Seg–Sex: 7h às 21h</p><p>Sáb–Dom: 8h às 20h</p></div>
+        <div class="address"><strong>Endereço</strong><p>Rua dos Cafezais, 42</p><p>Rio de Janeiro, RJ</p></div>
+      </div>
+    </div>
+    <p class="copy">© 2026 Grão & Alma. Todos os direitos reservados.</p>
+  </footer>
+
+  <a href="#header-page" class="back-to-top">↑</a>
+  <script src="../../cart.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>

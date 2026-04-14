@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grão & Alma | Cafeteria Artesanal</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="style-index.css">
+</head>
+
+<body>
+
+  <canvas id="bgCanvas"></canvas>
+  <div id="toast"></div>
+  <div id="cart-overlay"></div>
+
+  <!-- NAV MOBILE -->
+  <div id="mobile-nav">
+    <a href="index.html" class="active">Início</a>
+    <a href="pages/sobre/index.html">Sobre</a>
+    <a href="pages/cardapio/index.html">Cardápio</a>
+    <a href="pages/novidades/index.html">Novidades</a>
+    <a href="pages/contato/index.html">Contato</a>
+  </div>
+
+  <header id="header-page">
+    <a href="index.html" id="logo">
+      <span class="coffee-emoji">☕</span>
+      <span>Grão</span>
+      <span class="amp">&</span>
+      <span>Alma</span>
+    </a>
+
+    <nav>
+      <ul class="flex">
+        <li><a href="index.html" class="active">Início</a></li>
+        <li><a href="pages/sobre/index.html">Sobre</a></li>
+        <li><a href="pages/cardapio/index.html">Cardápio</a></li>
+        <li><a href="pages/novidades/index.html">Novidades</a></li>
+        <li><a href="pages/contato/index.html">Contato</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <!-- CARRINHO -->
+      <div class="cart-container">
+        <button class="cart-btn" id="cart-btn">
+          <span>🛒</span>
+          <span>Carrinho</span>
+          <span id="cart-count">0</span>
+        </button>
+        <div id="cart-dropdown">
+          <div class="cart-header">
+            <strong>Seu Pedido</strong>
+            <span class="cart-limit-badge" id="cart-limit-badge">0 / 10</span>
+          </div>
+          <div id="cart-items-list" class="cart-items-inner"></div>
+          <div class="cart-footer">
+            <div class="cart-total-row">
+              <span class="cart-total-label">Total</span>
+              <span class="cart-total-value" id="cart-total-display">R$ 0,00</span>
+            </div>
+            <div class="cart-limit-bar">
+              <div class="cart-limit-fill" id="cart-fill-bar" style="width:0%"></div>
+            </div>
+            <p class="cart-limit-text" id="cart-limit-text">Máximo de 10 itens por pedido</p>
+            <button class="btn-finalizar" id="btn-finalizar" disabled>Finalizar Pedido →</button>
+          </div>
+        </div>
+      </div>
+
+      <button id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ══════════════ HERO ══════════════ -->
+    <section id="hero" class="section-margin">
+      <div class="description-hero">
+        <div class="title-home-container">
+          <span class="separator"></span>
+          <p>Cafeteria artesanal</p>
+        </div>
+        <h1 id="main-title-hero">
+          Onde cada <br><em>xícara</em> conta <br>uma história.
+        </h1>
+        <p>
+          Grãos selecionados de origem única, torrados com amor e preparados por baristas apaixonados. Venha viver a experiência do café de verdade.
+        </p>
+        <div class="btn-container-hero">
+          <a href="pages/cardapio/index.html" class="btn btn-look-menu btn-anim">Ver cardápio</a>
+          <a href="pages/sobre/index.html"    class="btn btn-our-history btn-anim">Nossa História</a>
+        </div>
+      </div>
+
+      <!-- XÍCARA -->
+      <div class="cup-hero-container">
+        <div class="cup">
+          <div class="cup-vapour">
+            <div style="--i:1;"  class="vapour cup-smoke-1"></div>
+            <div style="--i:3;"  class="vapour cup-smoke-2"></div>
+            <div style="--i:16;" class="vapour cup-smoke-3"></div>
+            <div style="--i:5;"  class="vapour cup-smoke-4"></div>
+            <div style="--i:13;" class="vapour cup-smoke-5"></div>
+            <div style="--i:20;" class="vapour cup-smoke-6"></div>
+            <div style="--i:6;"  class="vapour cup-smoke-7"></div>
+            <div style="--i:7;"  class="vapour cup-smoke-8"></div>
+            <div style="--i:10;" class="vapour cup-smoke-9"></div>
+            <div style="--i:8;"  class="vapour cup-smoke-10"></div>
+            <div style="--i:17;" class="vapour cup-smoke-10"></div>
+            <div style="--i:11;" class="vapour cup-smoke-10"></div>
+            <div style="--i:12;" class="vapour cup-smoke-10"></div>
+            <div style="--i:14;" class="vapour cup-smoke-10"></div>
+            <div style="--i:2;"  class="vapour cup-smoke-10"></div>
+            <div style="--i:9;"  class="vapour cup-smoke-10"></div>
+            <div style="--i:15;" class="vapour cup-smoke-10"></div>
+            <div style="--i:4;"  class="vapour cup-smoke-10"></div>
+            <div style="--i:19;" class="vapour cup-smoke-10"></div>
+          </div>
+          <div class="cup-visual-hero">
+            <div class="cup-hole-top"></div>
+            <div class="cup-handle"></div>
+          </div>
+          <div class="cup-bottom"></div>
+        </div>
+
+        <div class="cup-information">
+          <div class="floating-info-container fi-1">
+            <span>🌿</span>
+            <p>Orgânico</p>
+          </div>
+          <div class="floating-info-container fi-3">
+            <span>🏔️</span>
+            <p>Altitude</p>
+          </div>
+          <div class="floating-info-container fi-5">
+            <span>✋</span>
+            <p>Artesanal</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ ESTATÍSTICAS ══════════════ -->
+    <div id="statistics-container">
+      <div>
+        <span class="stat-num" data-target="6">0</span>
+        <span>anos</span>
+        <p>DE HISTÓRIA</p>
+      </div>
+      <div class="separator"></div>
+      <div>
+        <span class="stat-num" data-target="12">0</span>
+        <span>origens</span>
+        <p>DE GRÃO SELECIONADO</p>
+      </div>
+      <div class="separator"></div>
+      <div>
+        <span class="stat-num" data-target="800">0</span>
+        <span>+</span>
+        <p>XÍCARAS POR DIA</p>
+      </div>
+      <div class="separator"></div>
+      <div>
+        <span class="stat-num" data-target="98">0</span>
+        <span>%</span>
+        <p>CLIENTES SATISFEITOS</p>
+      </div>
+    </div>
+
+    <!-- ══════════════ MENU DESTAQUE ══════════════ -->
+    <section id="menu" class="section-margin">
+      <div class="title-home-container">
+        <span class="separator"></span>
+        <p>NOSSOS CLÁSSICOS</p>
+      </div>
+      <div class="menu-container">
+        <h2>Feito para quem <em>sente o café</em></h2>
+
+        <div class="cards-products-container">
+          <div class="cards-products">
+            <header class="header-product">
+              <div><span>⭐</span> Favorito</div>
+            </header>
+            <div class="info-product-container">
+              <span class="img-product">☕</span>
+              <div class="product-info">
+                <strong>Espresso Signature</strong>
+                <p>Blend exclusivo Grão & Alma. Notas de chocolate amargo, caramelo e amêndoa torrada.</p>
+              </div>
+              <div class="price-container">
+                <span>R$ 9,00</span>
+                <a href="pages/cardapio/index.html">Ver mais →</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="cards-products featured">
+            <header class="header-product">
+              <div><span>⭐</span> Favorito</div>
+            </header>
+            <div class="info-product-container">
+              <span class="img-product">🥛</span>
+              <div class="product-info">
+                <strong>Latte de Baunilha</strong>
+                <p>Espresso duplo com leite vaporizado e extrato natural de baunilha de Madagascar.</p>
+              </div>
+              <div class="price-container">
+                <span>R$ 18,00</span>
+                <a href="pages/cardapio/index.html">Ver mais →</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="cards-products">
+            <header class="header-product">
+              <div><span>🧊</span> Top Frio</div>
+            </header>
+            <div class="info-product-container">
+              <span class="img-product">🧊</span>
+              <div class="product-info">
+                <strong>Cold Brew 24h</strong>
+                <p>Infusão a frio por 24 horas. Suave, intenso e refrescante. Servido com gelo e canela.</p>
+              </div>
+              <div class="price-container">
+                <span>R$ 16,00</span>
+                <a href="pages/cardapio/index.html">Ver mais →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="pages/cardapio/index.html" class="btn btn-look-menu btn-anim">Ver cardápio completo</a>
+    </section>
+
+    <!-- ══════════════ SOBRE A EMPRESA ══════════════ -->
+    <section id="about-company" class="section-margin">
+      <div class="info-about-container">
+        <div class="title-home-container">
+          <span class="separator"></span>
+          <p>A EXPERIÊNCIA</p>
+        </div>
+        <div class="info-about">
+          <h2>Mais que café. <br><em>Um ritual.</em></h2>
+          <p>Na Grão & Alma, cada detalhe é pensado para criar momentos inesquecíveis. Do aroma que invade o ambiente à última gota na xícara.</p>
+          <ul>
+            <li>
+              <span>🌱</span>
+              <div>
+                <strong>Grãos de origem única</strong>
+                <p>Selecionamos diretamente de fazendas parceiras no Brasil, Etiópia e Colômbia.</p>
+              </div>
+            </li>
+            <li>
+              <span>🔥</span>
+              <div>
+                <strong>Torra artesanal na casa</strong>
+                <p>Torramos semanalmente em pequenos lotes para garantir frescor e qualidade máximos.</p>
+              </div>
+            </li>
+            <li>
+              <span>🎨</span>
+              <div>
+                <strong>Latte art com amor</strong>
+                <p>Nossos baristas são treinados em técnicas avançadas de latte art e extração perfeita.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="especiality-about-container">
+        <div class="best-about-container">
+          <span>🏆</span>
+          <strong>Melhor Cafeteria da Cidade</strong>
+          <p>Premiada pelo Guia Gastronômico 2024</p>
+        </div>
+        <div class="especiality-cards">
+          <div class="cards"><span>🫘</span><p>Torra</p><p>Semanal</p></div>
+          <div class="cards"><span>📍</span><p>Wi-Fi</p><p>Grátis</p></div>
+          <div class="cards"><span>🎵</span><p>Música</p><p>Ao Vivo</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ DEPOIMENTOS ══════════════ -->
+    <section id="stories" class="section-margin">
+      <div class="title-home-container">
+        <span class="separator"></span>
+        <p>QUEM NOS VISITA</p>
+      </div>
+      <h2><em>Histórias</em> reais</h2>
+
+      <div class="stories-cards-container">
+        <div class="cards">
+          <span class="stars">★★★★★</span>
+          <p>"O melhor espresso que já tomei na vida. A Grão & Alma é um absurdo de boa."</p>
+          <div class="user">
+            <div class="photo-perfil">LR</div>
+            <div class="info-user">
+              <strong>Lucas Ribeiro</strong>
+              <span>Cliente fiel</span>
+            </div>
+          </div>
+        </div>
+        <div class="cards story-featured">
+          <span class="stars">★★★★★</span>
+          <p>"Vim uma vez e me tornei frequentador diário. O ambiente é aconchegante e o café... perfeito."</p>
+          <div class="user">
+            <div class="photo-perfil">MF</div>
+            <div class="info-user">
+              <strong>Marina Fonseca</strong>
+              <span>Frequentadora desde 2019</span>
+            </div>
+          </div>
+        </div>
+        <div class="cards">
+          <span class="stars">★★★★★</span>
+          <p>"O cold brew deles é de outro nível. Ambiente incrível para focar e produzir."</p>
+          <div class="user">
+            <div class="photo-perfil">TM</div>
+            <div class="info-user">
+              <strong>Thiago Melo</strong>
+              <span>Nômade digital</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ CTA BANNER ══════════════ -->
+    <div class="banner">
+      <span>☕</span>
+      <div>
+        <h2>Venha tomar um café com a gente</h2>
+        <p>Segunda a Sexta, 7h às 21h · Sábado e Domingo, 8h às 20h</p>
+        <div class="banner-btn">
+          <a href="pages/contato/index.html" class="btn-primary btn-anim">Como Chegar</a>
+          <a href="pages/cardapio/index.html" class="btn-secondary btn-anim">Ver Cardápio</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer id="footer-container" class="section-margin">
+    <div class="footer-info">
+      <div class="footer-logo">
+        <strong><span>☕</span> Grão <span class="amp">&</span> Alma</strong>
+        <p>Cafeteria artesanal com alma</p>
+      </div>
+      <nav class="footer-nav">
+        <strong>Navegação</strong>
+        <ul>
+          <li class="footer-menu-option"><a href="index.html">Início</a></li>
+          <li class="footer-menu-option"><a href="pages/sobre/index.html">Sobre</a></li>
+          <li class="footer-menu-option"><a href="pages/cardapio/index.html">Cardápio</a></li>
+          <li class="footer-menu-option"><a href="pages/novidades/index.html">Novidades</a></li>
+          <li class="footer-menu-option"><a href="pages/contato/index.html">Contato</a></li>
+        </ul>
+      </nav>
+      <div class="place-footer-container">
+        <div class="hours">
+          <strong>Horários</strong>
+          <p>Seg–Sex: 7h às 21h</p>
+          <p>Sáb–Dom: 8h às 20h</p>
+        </div>
+        <div class="address">
+          <strong>Endereço</strong>
+          <p>Rua dos Cafezais, 42</p>
+          <p>Rio de Janeiro, RJ</p>
+        </div>
+      </div>
+    </div>
+    <p class="copy">© 2026 Grão & Alma. Todos os direitos reservados.</p>
+  </footer>
+
+  <a href="#header-page" class="back-to-top">↑</a>
+
+  <script src="cart.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>

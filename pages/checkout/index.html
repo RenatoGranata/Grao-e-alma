@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finalizar Pedido | Grão & Alma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../global.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <canvas id="bgCanvas"></canvas>
+  <div id="toast"></div>
+
+  <header id="header-page">
+    <a href="../../index.html" id="logo">
+      <span class="coffee-emoji">☕</span>
+      <span>Grão</span><span class="amp">&</span><span>Alma</span>
+    </a>
+    <nav>
+      <ul class="flex">
+        <li><a href="../../index.html">Início</a></li>
+        <li><a href="../sobre/index.html">Sobre</a></li>
+        <li><a href="../cardapio/index.html">Cardápio</a></li>
+        <li><a href="../novidades/index.html">Novidades</a></li>
+        <li><a href="../contato/index.html">Contato</a></li>
+      </ul>
+    </nav>
+    <button id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </header>
+
+  <div id="mobile-nav">
+    <a href="../../index.html">Início</a>
+    <a href="../sobre/index.html">Sobre</a>
+    <a href="../cardapio/index.html">Cardápio</a>
+    <a href="../novidades/index.html">Novidades</a>
+    <a href="../contato/index.html">Contato</a>
+  </div>
+
+  <main class="section-margin">
+
+    <div class="checkout-back">
+      <a href="../cardapio/index.html" class="back-link">← Voltar ao cardápio</a>
+    </div>
+
+    <div class="title-home-container">
+      <span class="separator"></span>
+      <p>FINALIZAR PEDIDO</p>
+    </div>
+    <div class="title-menu-container">
+      <h1><em>Quase lá</em></h1>
+      <p>Confirme seus dados e escolha como pagar.</p>
+    </div>
+
+    <!-- Aviso carrinho vazio -->
+    <div id="empty-warning" class="empty-warning" style="display:none;">
+      <span>🛒</span>
+      <p>Seu carrinho está vazio.</p>
+      <a href="../cardapio/index.html" class="btn-primary">Ver Cardápio</a>
+    </div>
+
+    <div class="checkout-grid" id="checkout-content">
+
+      <!-- FORMULÁRIO -->
+      <div class="checkout-form-section">
+
+        <div class="form-block">
+          <div class="form-block-title">👤 Seus dados</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="field-nome">Nome *</label>
+              <input type="text" id="field-nome" placeholder="Seu nome completo">
+            </div>
+            <div class="form-group">
+              <label for="field-tel">Telefone</label>
+              <input type="tel" id="field-tel" placeholder="(21) 9 0000-0000">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-block">
+          <div class="form-block-title">📍 Como receber</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="order-type">Tipo de pedido</label>
+              <select id="order-type">
+                <option value="balcao">🏠 Retirar no balcão</option>
+                <option value="mesa">🪑 Levar à mesa</option>
+                <option value="entrega">🛵 Delivery</option>
+              </select>
+            </div>
+            <div class="form-group" id="mesa-field" style="display:none;">
+              <label>Número da mesa</label>
+              <input type="text" id="field-mesa" placeholder="Ex: Mesa 7">
+            </div>
+          </div>
+          <!-- AVISO DE CONFLITO COM DELIVERY -->
+          <!-- Aparece automaticamente via JS quando tem item "só local" + delivery selecionado -->
+          <div id="delivery-conflict-warning" class="delivery-conflict-warning" style="display:none;">
+            <span class="conflict-icon">🚫</span>
+            <div class="conflict-text">
+              <strong>Entrega indisponível para alguns itens</strong>
+              <p>Os itens abaixo só podem ser consumidos no local (mesa ou balcão):</p>
+              <p class="conflict-items" id="conflict-items-list"></p>
+              <p>Retire esses itens do carrinho ou escolha <strong>Retirar no balcão</strong> / <strong>Levar à mesa</strong>.</p>
+            </div>
+          </div>
+
+          <div id="delivery-fields" style="display:none; margin-top:1rem;">
+            <div class="form-group">
+              <label>Endereço</label>
+              <input type="text" id="field-endereco" placeholder="Rua, número">
+            </div>
+            <div class="form-row form-row-spaced">
+              <div class="form-group">
+                <label>Bairro</label>
+                <input type="text" id="field-bairro" placeholder="Bairro">
+              </div>
+              <div class="form-group">
+                <label>Complemento</label>
+                <input type="text" id="field-complemento" placeholder="Apto, bloco...">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-block">
+          <div class="form-block-title">📝 Observações</div>
+          <div class="form-group">
+            <label>Algum pedido especial?</label>
+            <textarea id="field-obs" rows="3" placeholder="Ex: sem açúcar, leite vegetal, alergia a amendoim..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-block">
+          <div class="form-block-title">💳 Pagamento</div>
+          <div class="payment-options">
+            <div class="payment-opt selected" data-pay="cartao">
+              <span class="pay-icon">💳</span>
+              <span class="pay-name">Cartão</span>
+              <span class="pay-sub">Crédito ou débito</span>
+            </div>
+            <div class="payment-opt" data-pay="pix">
+              <span class="pay-icon">📱</span>
+              <span class="pay-name">Pix</span>
+              <span class="pay-sub">Aprovação imediata</span>
+            </div>
+            <div class="payment-opt" data-pay="dinheiro">
+              <span class="pay-icon">💵</span>
+              <span class="pay-name">Dinheiro</span>
+              <span class="pay-sub">Troco na entrega</span>
+            </div>
+            <div class="payment-opt" data-pay="vale">
+              <span class="pay-icon">🎟️</span>
+              <span class="pay-name">Vale</span>
+              <span class="pay-sub">Alimentação / refeição</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RESUMO DO PEDIDO -->
+      <div class="order-summary-sticky">
+        <div class="order-summary">
+          <div class="order-summary-title">Resumo do Pedido</div>
+          <div class="order-items-list" id="checkout-items-list"></div>
+          <div class="order-totals">
+            <div class="total-row">
+              <span>Subtotal</span>
+              <span id="co-subtotal">R$ 0,00</span>
+            </div>
+            <div class="total-row">
+              <span>Taxa de serviço</span>
+              <span>R$ 0,00</span>
+            </div>
+            <div class="total-row total-main">
+              <span>Total</span>
+              <strong id="co-total">R$ 0,00</strong>
+            </div>
+          </div>
+          <button id="btn-confirmar">☕ Confirmar Pedido</button>
+        </div>
+      </div>
+
+    </div><!-- /checkout-grid -->
+
+    <!-- TELA DE SUCESSO -->
+    <div id="success-screen">
+      <div class="success-icon">☕</div>
+      <h2>Pedido confirmado!</h2>
+      <div class="order-id-badge" id="order-id-display">PEDIDO #0000</div>
+      <p>Estamos preparando tudo com carinho. Tempo estimado: <strong>15–20 minutos</strong>.</p>
+      <div class="success-actions">
+        <a href="../cardapio/index.html" class="btn-primary">+ Fazer novo pedido</a>
+        <a href="../../index.html" class="btn-secondary btn-success-voltar">Ir para o início</a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer id="footer-container" class="section-margin">
+    <div class="footer-info">
+      <div class="footer-logo">
+        <strong><span>☕</span> Grão <span class="amp">&</span> Alma</strong>
+        <p>Cafeteria artesanal com alma</p>
+      </div>
+      <nav class="footer-nav">
+        <strong>Navegação</strong>
+        <ul>
+          <li class="footer-menu-option"><a href="../../index.html">Início</a></li>
+          <li class="footer-menu-option"><a href="../cardapio/index.html">Cardápio</a></li>
+          <li class="footer-menu-option"><a href="../contato/index.html">Contato</a></li>
+        </ul>
+      </nav>
+      <div class="place-footer-container">
+        <div class="hours"><strong>Horários</strong><p>Seg–Sex: 7h às 21h</p><p>Sáb–Dom: 8h às 20h</p></div>
+      </div>
+    </div>
+    <p class="copy">© 2026 Grão & Alma. Todos os direitos reservados.</p>
+  </footer>
+
+  <a href="#header-page" class="back-to-top">↑</a>
+  <script src="../../cart.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>

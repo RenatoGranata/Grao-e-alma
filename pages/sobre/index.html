@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre | Grão & Alma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+  <link rel="stylesheet" href="../../global.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <canvas id="bgCanvas"></canvas>
+  <div id="toast"></div>
+  <div id="cart-overlay"></div>
+  <div id="mobile-nav">
+    <a href="../../index.html">Início</a>
+    <a href="index.html" class="active">Sobre</a>
+    <a href="../cardapio/index.html">Cardápio</a>
+    <a href="../novidades/index.html">Novidades</a>
+    <a href="../contato/index.html">Contato</a>
+  </div>
+  <header id="header-page">
+    <a href="../../index.html" id="logo"><span class="coffee-emoji">☕</span><span>Grão</span><span
+        class="amp">&</span><span>Alma</span></a>
+    <nav>
+      <ul class="flex">
+        <li><a href="../../index.html">Início</a></li>
+        <li><a href="index.html" class="active">Sobre</a></li>
+        <li><a href="../cardapio/index.html">Cardápio</a></li>
+        <li><a href="../novidades/index.html">Novidades</a></li>
+        <li><a href="../contato/index.html">Contato</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <div class="cart-container">
+        <button class="cart-btn" id="cart-btn"><span>🛒</span><span>Carrinho</span><span
+            id="cart-count">0</span></button>
+        <div id="cart-dropdown">
+          <div class="cart-header"><strong>Seu Pedido</strong><span class="cart-limit-badge" id="cart-limit-badge">0 /
+              10</span></div>
+          <div id="cart-items-list" class="cart-items-inner"></div>
+          <div class="cart-footer">
+            <div class="cart-total-row"><span class="cart-total-label">Total</span><span class="cart-total-value"
+                id="cart-total-display">R$ 0,00</span></div>
+            <div class="cart-limit-bar">
+              <div class="cart-limit-fill" id="cart-fill-bar" style="width:0%"></div>
+            </div>
+            <p class="cart-limit-text" id="cart-limit-text">Máximo de 10 itens por pedido</p>
+            <button class="btn-finalizar" id="btn-finalizar" disabled>Finalizar Pedido →</button>
+          </div>
+        </div>
+      </div>
+      <button id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <main>
+    <section class="page-hero section-margin">
+      <div class="title-home-container"><span class="separator"></span>
+        <p>Nossa História</p>
+      </div>
+      <h1>Grão <em>&</em> Alma</h1>
+      <p class="page-hero-sub">Uma história sobre paixão, café e comunidade.</p>
+    </section>
+
+    <section id="origem" class="section-margin">
+      <div class="origem-visual">
+        <div class="origem-card">
+          <span>🫘</span>
+          <strong>Nossa Fundação</strong>
+          <p>Rio de Janeiro, 2018</p>
+        </div>
+        <div class="year-badge">2018</div>
+      </div>
+      <div class="origem-text">
+        <div class="title-home-container"><span class="separator"></span>
+          <p>Como tudo começou</p>
+        </div>
+        <h2>De um sonho a <br><em>um lugar especial</em></h2>
+        <p>A Grão & Alma nasceu da obsessão de quatro amigos, <strong>Renato</strong>, <strong>João Pedro</strong>,
+          <strong>Vitor</strong> e <strong>Letícia</strong>, por um café que fosse mais do que uma bebida. Após anos
+          viajando pelo mundo em busca das melhores origens de grão, decidiram trazer essa experiência para o Rio de
+          Janeiro.</p>
+        <p>Abrimos nossas portas em <strong>março de 2018</strong> com apenas 6 mesas, um torrador vintage italiano e
+          uma visão clara: criar um espaço onde pessoas se sentissem em casa, com o melhor café do bairro.</p>
+        <p>Hoje, após mais de 6 anos, continuamos fiéis à mesma essência — artesanal, humano e apaixonado.</p>
+      </div>
+    </section>
+
+    <section id="fundadores" class="section-margin">
+      <div class="title-home-container"><span class="separator"></span>
+        <p>As pessoas por trás do café</p>
+      </div>
+      <h2>Nossos <em>Fundadores</em></h2>
+      <div class="fundadores-grid">
+
+        <div class="founder-card">
+          <div class="founder-avatar">RE</div>
+          <h3>Renato</h3>
+          <p class="founder-role">Head fundador</p>
+          <p>
+            Dev front-end apaixonado por café, responsável pelo funcionamento do site usando Javascript com foco
+            principal nas páginas de vendas de produto, animações com CSS e acabamento do projeto.
+          </p>
+          <div class="founder-links">
+            <a href="https://github.com/RenatoGranata" rel="noopener" class="founder-link" title="GitHub" target="_blank">
+              <i class="devicon-github-original"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/renato-mendonca-granata/" rel="noopener" class="founder-link"
+              title="LinkedIn" target="_blank">
+              <i class="devicon-linkedin-plain"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="founder-card">
+          <div class="founder-avatar">JP</div>
+          <h3>João Pedro</h3>
+          <p class="founder-role">Co-fundador</p>
+          <p>
+            Dev front-end apaixonado por café, responsável pelas estruturas visuais das páginas focado em html.
+          </p>
+          <div class="founder-links">
+            <a href="https://github.com/joaopedro836" rel="noopener" class="founder-link" title="GitHub" target="_blank">
+              <i class="devicon-github-original"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/jo%C3%A3o-pedro-46a3333bb/" rel="noopener" class="founder-link"
+              title="LinkedIn" target="_blank">
+              <i class="devicon-linkedin-plain"></i>
+              </svg></a>
+
+          </div>
+        </div>
+
+        <div class="founder-card">
+          <div class="founder-avatar">LE</div>
+          <h3>Letícia</h3>
+          <p class="founder-role">Co-fundadora & Designer</p>
+          <p>
+            Dev front-end apaixonada por café, responsável pelo design das páginas e experiencia visual, focando no CSS
+            das páginas.
+          </p>
+          <div class="founder-links">
+            <a href="https://github.com/leleramos931" rel="noopener" class="founder-link" title="GitHub"
+              target="_blank">
+              <i class="devicon-github-original"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/leticia-ramos-dev/" rel="noopener" class="founder-link"
+              title="LinkedIn" target="_blank">
+              <i class="devicon-linkedin-plain"></i>
+            </a>
+
+          </div>
+        </div>
+
+        <div class="founder-card">
+          <div class="founder-avatar">VI</div>
+          <h3>Vitor</h3>
+          <p class="founder-role">Co-fundador</p>
+          <p>
+            Dev front-end apaixonado por café, responsável pelo responsividade das páginas e revisão das estruturas HTML
+            e CSS.
+          </p>
+          <div class="founder-links">
+            <a href="#GITHUB_VITOR" rel="noopener" class="founder-link" title="GitHub" target="_blank">
+              <i class="devicon-github-original"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/victor-hugo-lucena-332a333b9/" rel="noopener" class="founder-link"
+              title="LinkedIn" target="_blank">
+              <i class="devicon-linkedin-plain"></i>
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="valores" class="section-margin">
+      <div class="title-home-container"><span class="separator"></span>
+        <p>O que nos guia</p>
+      </div>
+      <h2>Nossos <em>Valores</em></h2>
+      <div class="valores-grid">
+        <div class="valor-card"><span>🌱</span><strong>Sustentabilidade</strong>
+          <p>Embalagens biodegradáveis, resíduos de borra usados como adubo e energia 100% renovável.</p>
+        </div>
+        <div class="valor-card"><span>🤝</span><strong>Comércio Justo</strong>
+          <p>Compramos diretamente dos produtores, pagando preços justos acima do mercado.</p>
+        </div>
+        <div class="valor-card"><span>🎓</span><strong>Educação</strong>
+          <p>Workshops mensais gratuitos sobre café para a comunidade. Queremos que todos entendam o que há dentro da
+            xícara.</p>
+        </div>
+        <div class="valor-card"><span>❤️</span><strong>Comunidade</strong>
+          <p>Apoiamos artistas locais, exposições e eventos culturais no nosso espaço todos os meses.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="banner">
+      <span>☕</span>
+      <div>
+        <h2>Venha escrever a próxima parte dessa história</h2>
+        <p>Te esperamos com o café passando e uma mesa reservada.</p>
+        <div class="banner-btn">
+          <a href="../contato/index.html" class="btn-primary btn-anim">Visite-nos</a>
+          <a href="../cardapio/index.html" class="btn-secondary btn-anim">Ver Cardápio</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer id="footer-container" class="section-margin">
+    <div class="footer-info">
+      <div class="footer-logo"><strong><span>☕</span> Grão <span class="amp">&</span> Alma</strong>
+        <p>Cafeteria artesanal com alma</p>
+      </div>
+      <nav class="footer-nav"><strong>Navegação</strong>
+        <ul>
+          <li class="footer-menu-option"><a href="../../index.html">Início</a></li>
+          <li class="footer-menu-option"><a href="index.html">Sobre</a></li>
+          <li class="footer-menu-option"><a href="../cardapio/index.html">Cardápio</a></li>
+          <li class="footer-menu-option"><a href="../novidades/index.html">Novidades</a></li>
+          <li class="footer-menu-option"><a href="../contato/index.html">Contato</a></li>
+        </ul>
+      </nav>
+      <div class="place-footer-container">
+        <div class="hours"><strong>Horários</strong>
+          <p>Seg–Sex: 7h às 21h</p>
+          <p>Sáb–Dom: 8h às 20h</p>
+        </div>
+        <div class="address"><strong>Endereço</strong>
+          <p>Rua dos Cafezais, 42</p>
+          <p>Rio de Janeiro, RJ</p>
+        </div>
+      </div>
+    </div>
+    <p class="copy">© 2026 Grão & Alma. Todos os direitos reservados.</p>
+  </footer>
+
+  <a href="#header-page" class="back-to-top">↑</a>
+  <script src="../../cart.js"></script>
+</body>
+
+</html>

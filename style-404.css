@@ -1,0 +1,262 @@
+/* ================================
+   GRÃO & ALMA — style-404.css
+   ================================ */
+
+#pagina-404 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6rem;
+  min-height: calc(100vh - 80px);
+  padding: 4rem 9rem;
+}
+
+/* ── LADO ESQUERDO: copo ── */
+.cup-404-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 404 fantasma atrás do copo */
+.numero-404 {
+  position: absolute;
+  top: -40px;
+  font-family: 'Playfair Display', serif;
+  font-size: 8rem;
+  font-weight: 900;
+  color: var(--cafe-mid);
+  opacity: 0.18;
+  letter-spacing: 8px;
+  user-select: none;
+  z-index: 0;
+}
+
+/* o wrapper .cup herda o mesmo layout da home */
+.cup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* copo com rachadura — leve inclinação pra dramatizar */
+.cup.broken {
+  transform: rotate(-4deg);
+}
+
+/* corpo do copo — idêntico à home */
+.cup-visual-hero {
+  position: relative;
+  width: 10rem;
+  height: 10rem;
+  background: var(--creme);
+  border-top-left-radius: 0.7rem;
+  border-top-right-radius: 0.7rem;
+  border-bottom-left-radius: 3rem;
+  border-bottom-right-radius: 3rem;
+  display: flex;
+  justify-content: center;
+  overflow: visible;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(196,136,58,0.08);
+}
+
+/* buraco do topo — vazio, sem café */
+.cup-hole-top {
+  position: absolute;
+  top: 5px;
+  width: 9rem;
+  height: 1rem;
+  z-index: 1;
+  border-radius: 100%;
+  background-color: #1a1208;
+  /* sem box-shadow brilhante porque não tem café dentro */
+}
+
+/* alça — idêntica à home */
+.cup-handle {
+  position: absolute;
+  background: transparent;
+  border: 20px solid var(--creme);
+  width: 6rem;
+  height: 8rem;
+  right: -60px;
+  top: 10px;
+  border-radius: 80%;
+}
+
+/* pires — idêntico à home */
+.cup-bottom {
+  width: 15rem;
+  height: 2rem;
+  background-color: var(--caramelo);
+  border-top-left-radius: 5%;
+  border-top-right-radius: 5%;
+  border-bottom-right-radius: 100%;
+  border-bottom-left-radius: 100%;
+  box-shadow: 0 8px 30px rgba(196,136,58,0.25);
+}
+
+/* SVG das rachaduras — cobre o corpo do copo */
+.rachaduras {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+  overflow: visible;
+}
+
+/* ── ROSTO TRISTE ── */
+.rosto-triste {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-68%, -40%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  z-index: 2;
+}
+
+.olhos {
+  display: flex;
+  gap: 12px;
+}
+
+.olho {
+  width: 22px;
+  height: 22px;
+}
+
+.boca-triste {
+  width: 48px;
+  height: 16px;
+}
+
+/* lágrima */
+.lagrima {
+  position: absolute;
+  left: 6px;
+  top: 28px;
+  width: 5px;
+  height: 9px;
+  background: rgba(166, 124, 82, 0.7);
+  border-radius: 50% 50% 50% 50% / 30% 30% 70% 70%;
+}
+
+/* ── CAFÉ VAZANDO PELA RACHA ── */
+.cafe-vazando {
+  position: absolute;
+  top: 55px;
+  right: -12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  z-index: 1;
+}
+
+.gota {
+  background: #3d2410;
+  border-radius: 50% 50% 55% 55%;
+  opacity: 0.75;
+}
+
+.g1 { width: 7px;  height: 10px; opacity: 0.8; }
+.g2 { width: 5px;  height: 8px;  opacity: 0.65; margin-left: 4px; }
+.g3 { width: 8px;  height: 6px;  opacity: 0.55; border-radius: 50%; }
+
+/* ── POÇA DE CAFÉ ── */
+.poca-cafe {
+  width: 12rem;
+  height: 1.4rem;
+  background: radial-gradient(ellipse, #2a1608 0%, #1a0e04 60%, transparent 100%);
+  border-radius: 50%;
+  margin-top: -4px;
+  opacity: 0.7;
+}
+
+/* ── LADO DIREITO: texto ── */
+.texto-404 {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  max-width: 420px;
+}
+
+.texto-404 h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.2rem;
+  color: var(--creme);
+  line-height: 1.1;
+}
+
+.texto-404 > p {
+  color: var(--texto-soft);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.botoes-404 {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.btn {
+  padding: 0.9rem 2rem;
+  border-radius: 2rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-look-menu {
+  background: var(--accent);
+  color: var(--cafe-escuro);
+  transition: background 0.2s linear;
+}
+
+.btn-look-menu:hover { background: var(--dourado); }
+
+.btn-our-history {
+  background: transparent;
+  color: var(--creme);
+  border: 1px solid var(--cafe-mid);
+  transition: border-color 0.2s linear, color 0.2s linear;
+}
+
+.btn-our-history:hover { border-color: var(--dourado); color: var(--dourado); }
+
+/* ── RESPONSIVO ── */
+@media (max-width: 1024px) {
+  #pagina-404 {
+    flex-direction: column;
+    text-align: center;
+    padding: 4rem 2rem;
+    gap: 3rem;
+  }
+
+  .botoes-404 { justify-content: center; }
+  .numero-404 { font-size: 6rem; }
+}
+
+@media (max-width: 768px) {
+  .texto-404 h1 { font-size: 2.4rem; }
+  .numero-404   { font-size: 5rem; }
+}
