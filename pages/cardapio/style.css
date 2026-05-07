@@ -78,13 +78,18 @@ input[type="radio"]:checked + label { background: var(--accent); color: var(--ca
 /* ── CARD ── */
 .item-card {
   display: flex;
-  gap: 1.2rem;
+  flex-direction: column;
   background: var(--cafe-dark);
   border: 1px solid var(--cafe-mid);
-  padding: 1.8rem;
   border-radius: var(--radius);
   transition: transform 0.2s linear, border-color 0.2s linear;
-  position: relative;
+}
+
+.content-card-container {
+  display: flex;
+  flex: 1;
+  gap: 1rem;
+  margin: 1rem 1.8rem 1.8rem 1rem;
 }
 
 .item-card:hover {
@@ -111,9 +116,17 @@ input[type="radio"]:checked + label { background: var(--accent); color: var(--ca
   border: 1px solid rgba(196,136,58,0.2);
 }
 
-.item-card > span.card-emoji { font-size: 2rem; flex-shrink: 0; margin-top: 0.2rem; }
+.content-card-container> span.card-emoji { 
+  font-size: 2.5rem; 
+}
 
-.item-info { display: flex; flex-direction: column; gap: 0.8rem; flex: 1; }
+.item-info {
+  margin-top: 0.5rem; 
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  flex: 1; 
+}
 
 .item-price {
   display: flex;
@@ -219,10 +232,11 @@ input[type="radio"]:checked + label { background: var(--accent); color: var(--ca
 
 /* Badge "somente local" dentro do card */
 .item-local-only-tag {
-  position: absolute;
-  top: 0.8rem;
-  left: 0.8rem;
-  font-size: 0.65rem;
+  margin-top: 0.7rem;
+  margin-left: 0.7rem;
+  width: fit-content;
+  height: fit-content;
+  font-size: 0.8rem;
   color: var(--texto-muted);
   background: rgba(26,18,8,0.7);
   border: 1px solid var(--cafe-mid);
@@ -230,10 +244,6 @@ input[type="radio"]:checked + label { background: var(--accent); color: var(--ca
   border-radius: 2rem;
 }
 
-/* Quando o card já tem badge (canto direito), o "Só local" vai no esquerdo */
-.item-card.featured .item-local-only-tag {
-  top: 2.2rem; /* empurra pra não colidir com o badge */
-}
 
 /* Destaque visual no filtro de delivery */
 label[for="delivery-items"] {

@@ -1,38 +1,39 @@
 
 
 /* ── Máscara de telefone ── */
-function setupTelMask() {
-  const tel = document.getElementById('field-tel');
-  if (!tel) return;
-  tel.addEventListener('input', function() {
-    let v = this.value.replace(/\D/g, '').slice(0, 11);
-    if (v.length <= 10) v = v.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
-    else                v = v.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
-    this.value = v;
+function setupPhoneMask() {
+  const phoneInput = document.getElementById('field-tel');
+  if (!phoneInput) return;
+  phoneInput.addEventListener('input', function() {
+    let digits = this.value.replace(/\D/g, '').slice(0, 11);
+    const isLandline = digits.length <= 10
+    if (isLandline) digits = digits.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+    else                digits = digits.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+    this.value = digits;
   });
 }
 
 /* ── Validação simples ── */
-function validarFormulario() {
-  const nome      = document.getElementById('field-nome');
-  const email     = document.getElementById('field-email');
-  const mensagem  = document.getElementById('field-mensagem');
-  const concordo  = document.getElementById('field-concordo');
-  let ok = true;
+function validateForm() {
+  const nameInput      = document.getElementById('field-nome');
+  const emailInput     = document.getElementById('field-email');
+  const mensageInput  = document.getElementById('field-mensagem');
+  const privacyCheckbox  = document.getElementById('field-concordo');
+  let isValid = true;
 
-  [nome, email, mensagem].forEach(el => el.classList.remove('error'));
+  [nameInput, emailInput, mensageInput].forEach(el => el.classList.remove('error'));
 
-  if (!nome.value.trim()) { nome.classList.add('error'); ok = false; }
-  if (!email.value.includes('@') || !email.value.includes('.')) { email.classList.add('error'); ok = false; }
-  if (!mensagem.value.trim()) { mensagem.classList.add('error'); ok = false; }
-  if (!concordo.checked) { ok = false; showToast('⚠️ Aceite a política de privacidade.'); }
+  if (!nameInput.value.trim()) { nameInput.classList.add('error'); isValid = false; }
+  if (!emailInput.value.includes('@') || !emailInput.value.includes('.')) { emailInput.classList.add('error'); isValid = false; }
+  if (!mensageInput.value.trim()) { mensageInput.classList.add('error'); isValid = false; }
+  if (!privacyCheckbox.checked) { isValid = false; showToast('⚠️ Aceite a política de privacidade.'); }
 
-  return ok;
+  return isValid;
 }
 
 /* ── Enviar formulário ── */
-function enviarFormulario() {
-  const isFormComplete = validarFormulario()
+function submitForm() {
+  const isFormComplete = validateForm()
   if (isFormComplete === true )
     alert("Email enviado!")
   else {
@@ -42,20 +43,20 @@ function enviarFormulario() {
 
 /* ── Init ── */
 document.addEventListener('DOMContentLoaded', function() {
-  setupTelMask();
+  setupPhoneMask();
 
   /* Botão finalizar → checkout */
-  const btnF = document.getElementById('btn-finalizar');
-  if (btnF) btnF.addEventListener('click', () => {
+  const checkoutButton = document.getElementById('btn-finalizar');
+  if (checkoutButton) checkoutButton.addEventListener('click', () => {
     if (cartGetAll().length === 0) return;
     closeCart();
     window.location.href = '../checkout/index.html';
   });
 
   /* Enter não submete form acidentalmente */
-  document.querySelectorAll('.contact-form input').forEach(inp => {
-    inp.addEventListener('keydown', e => {
-      if (e.key === 'Enter') e.preventDefault();
+  document.querySelectorAll('.contact-form input').forEach(input => {
+    input.addEventListener('keydown', event => {
+      if (event.key === 'Enter') e.preventDefault();
     });
   });
 });

@@ -1,158 +1,155 @@
 // checkout/index.js — cuida da página de finalizar pedido
 
-function fmtPreco(valor) {
-  return 'R$ ' + valor.toFixed(2).replace('.', ',');
+function formatPrice(value) {
+  return 'R$ ' + value.toFixed(2).replace('.', ',');
 }
 
 function renderCheckout() {
-  let carrinho = cartGetAll();
+  const cart = cartGetAll();
 
-  if (carrinho.length === 0) {
+  if (cart.length === 0) {
     document.getElementById('empty-warning').style.display    = 'flex';
     document.getElementById('checkout-content').style.display = 'none';
     return;
   }
 
-  let html       = '';
-  let totalGeral = 0;
+  let itemsHTML  = '';
+  let orderTotal = 0;
 
-  for (let i = 0; i < carrinho.length; i++) {
-    let item         = carrinho[i];
-    let subtotalItem = item.price * item.qty;
-    totalGeral       = totalGeral + subtotalItem;
+  for (let i = 0; i < cart.length; i++) {
+    const item         = cart[i];
+    const itemSubtotal = item.price * item.qty;
+    orderTotal         = orderTotal + itemSubtotal;
 
-    html += '<div class="order-item-row">';
-    html += '<span class="oi-emoji">' + item.emoji + '</span>';
-    html += '<div class="oi-info">';
-    html += '<div class="oi-name">' + item.name + '</div>';
-    html += '<div class="oi-qty">' + item.qty + 'x · ' + fmtPreco(item.price) + '</div>';
+    itemsHTML += '<div class="order-item-row">';
+    itemsHTML += '<span class="oi-emoji">' + item.emoji + '</span>';
+    itemsHTML += '<div class="oi-info">';
+    itemsHTML += '<div class="oi-name">' + item.name + '</div>';
+    itemsHTML += '<div class="oi-qty">' + item.qty + 'x · ' + formatPrice(item.price) + '</div>';
     if (item.delivery === false) {
-      html += '<div class="oi-local-warn">📍 Somente local</div>';
+      itemsHTML += '<div class="oi-local-warn">📍 Somente local</div>';
     }
-    html += '</div>';
-    html += '<span class="oi-price">' + fmtPreco(subtotalItem) + '</span>';
-    html += '</div>';
+    itemsHTML += '</div>';
+    itemsHTML += '<span class="oi-price">' + formatPrice(itemSubtotal) + '</span>';
+    itemsHTML += '</div>';
   }
 
-  document.getElementById('checkout-items-list').innerHTML = html;
-  document.getElementById('co-subtotal').textContent        = fmtPreco(totalGeral);
-  document.getElementById('co-total').textContent           = fmtPreco(totalGeral);
+  document.getElementById('checkout-items-list').innerHTML = itemsHTML;
+  document.getElementById('co-subtotal').textContent       = formatPrice(orderTotal);
+  document.getElementById('co-total').textContent          = formatPrice(orderTotal);
 }
 
 function setupOrderType() {
-  const select = document.getElementById('order-type');
-  if (select === null) return;
+  const orderTypeSelect = document.getElementById('order-type');
+  if (orderTypeSelect === null) return;
 
-  select.addEventListener('change', function() {
-    let tipo = select.value;
+  orderTypeSelect.addEventListener('change', function () {
+    const orderType = orderTypeSelect.value;
 
-    const campoMesa = document.getElementById('mesa-field');
-    if (tipo === 'mesa') { campoMesa.style.display = 'flex'; }
-    else                 { campoMesa.style.display = 'none'; }
+    const tableField = document.getElementById('mesa-field');
+    if (orderType === 'mesa') { tableField.style.display = 'flex'; }
+    else                      { tableField.style.display = 'none'; }
 
-    const campoDelivery = document.getElementById('delivery-fields');
-    if (tipo === 'entrega') { campoDelivery.style.display = 'block'; }
-    else                    { campoDelivery.style.display = 'none'; }
+    const deliveryFields = document.getElementById('delivery-fields');
+    if (orderType === 'entrega') { deliveryFields.style.display = 'block'; }
+    else                         { deliveryFields.style.display = 'none'; }
 
-    verificarConflitosDelivery();
+    checkDeliveryConflicts();
   });
 }
 
-function verificarConflitosDelivery() {
-  const select  = document.getElementById('order-type');
-  const avisoEl = document.getElementById('delivery-conflict-warning');
-  if (avisoEl === null) return;
+function checkDeliveryConflicts() {
+  const orderTypeSelect  = document.getElementById('order-type');
+  const conflictWarning  = document.getElementById('delivery-conflict-warning');
+  if (conflictWarning === null) return;
 
-  if (select.value !== 'entrega') {
-    avisoEl.style.display = 'none';
+  if (orderTypeSelect.value !== 'entrega') {
+    conflictWarning.style.display = 'none';
     return;
   }
 
-  let incompativeis = itensIncompativeisComDelivery();
+  const localOnlyItems = getLocalOnlyItemNames();
 
-  if (incompativeis.length === 0) {
-    avisoEl.style.display = 'none';
+  if (localOnlyItems.length === 0) {
+    conflictWarning.style.display = 'none';
   } else {
-    document.getElementById('conflict-items-list').textContent = incompativeis.join(', ');
-    avisoEl.style.display = 'flex';
+    document.getElementById('conflict-items-list').textContent = localOnlyItems.join(', ');
+    conflictWarning.style.display = 'flex';
   }
 }
 
 function setupPayment() {
-  const opcoes = document.querySelectorAll('.payment-opt');
+  const paymentOptions = document.querySelectorAll('.payment-opt');
 
-  for (let i = 0; i < opcoes.length; i++) {
-    opcoes[i].addEventListener('click', function() {
-      for (let j = 0; j < opcoes.length; j++) {
-        opcoes[j].classList.remove('selected');
+  for (let i = 0; i < paymentOptions.length; i++) {
+    paymentOptions[i].addEventListener('click', function () {
+      for (let j = 0; j < paymentOptions.length; j++) {
+        paymentOptions[j].classList.remove('selected');
       }
       this.classList.add('selected');
     });
   }
 }
 
-function setupTelMask() {
-  const campoTel = document.getElementById('field-tel');
-  if (campoTel === null) return;
+function setupPhoneMask() {
+  const phoneInput = document.getElementById('field-tel');
+  if (phoneInput === null) return;
 
-  campoTel.addEventListener('input', function() {
-    let soNumeros = campoTel.value.replace(/\D/g, '');
-    if (soNumeros.length > 11) soNumeros = soNumeros.slice(0, 11);
+  phoneInput.addEventListener('input', function () {
+    let digits = phoneInput.value.replace(/\D/g, '');
+    if (digits.length > 11) digits = digits.slice(0, 11);
 
-    let formatado = soNumeros;
-    if (soNumeros.length <= 10) {
-      formatado = soNumeros.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
-    } else {
-      formatado = soNumeros.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
-    }
+    const isLandline = digits.length <= 10;
+    if (isLandline) digits = digits.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+    else            digits = digits.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
 
-    campoTel.value = formatado;
+    phoneInput.value = digits;
   });
 }
 
-function confirmarPedido() {
-  const campoNome  = document.getElementById('field-nome');
-  const selectTipo = document.getElementById('order-type');
+function confirmOrder() {
+  const nameInput       = document.getElementById('field-nome');
+  const orderTypeSelect = document.getElementById('order-type');
 
-  if (campoNome.value.trim() === '') {
-    campoNome.classList.add('error');
-    campoNome.focus();
-    setTimeout(function() { campoNome.classList.remove('error'); }, 2500);
+  if (nameInput.value.trim() === '') {
+    nameInput.classList.add('error');
+    nameInput.focus();
+    setTimeout(function () { nameInput.classList.remove('error'); }, 2500);
     showToast('⚠️ Por favor, preencha seu nome.');
     return;
   }
 
   // bloqueia se tiver item só-local com delivery selecionado
-  if (selectTipo.value === 'entrega') {
-    let incompativeis = itensIncompativeisComDelivery();
-    if (incompativeis.length > 0) {
-      const avisoEl = document.getElementById('delivery-conflict-warning');
-      if (avisoEl !== null) avisoEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  if (orderTypeSelect.value === 'entrega') {
+    const localOnlyItems = getLocalOnlyItemNames();
+    if (localOnlyItems.length > 0) {
+      const conflictWarning = document.getElementById('delivery-conflict-warning');
+      if (conflictWarning !== null) conflictWarning.scrollIntoView({ behavior: 'smooth', block: 'center' });
       showToast('🚫 Remova os itens "Somente local" ou escolha retirada.');
       return;
     }
   }
 
-  let numeroPedido = Math.floor(1000 + Math.random() * 9000);
+  const orderNumber = Math.floor(1000 + Math.random() * 9000);
   cartClear();
 
   document.getElementById('checkout-content').style.display = 'none';
 
-  const telaSucesso = document.getElementById('success-screen');
-  document.getElementById('order-id-display').textContent = 'PEDIDO #' + numeroPedido;
-  telaSucesso.classList.add('show');
+  const successScreen = document.getElementById('success-screen');
+  document.getElementById('order-id-display').textContent = 'PEDIDO #' + orderNumber;
+  successScreen.classList.add('show');
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   renderCheckout();
   setupOrderType();
   setupPayment();
-  setupTelMask();
+  setupPhoneMask();
 
-  const btnConfirmar = document.getElementById('btn-confirmar');
-  if (btnConfirmar !== null) {
-    btnConfirmar.addEventListener('click', confirmarPedido);
+  const confirmButton = document.getElementById('btn-confirmar');
+  if (confirmButton !== null) {
+    confirmButton.addEventListener('click', confirmOrder);
   }
 });
